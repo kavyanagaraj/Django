@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%  for ele in books %}
+        <tr>
+          <td>{{ele.id}}</td>
+          <td>{{ele.title}}</td>
+          <td>{{ele.author}}</td>
+          <td>{{ele.category}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form class="" action="/process" method="post">
+      {% csrf_token %}
+      <div>
+      <!-- class="col-xs-3"> -->
+      <label for="title">Title:</label>
+      <input type="text" name = "title" id="title">
+      </div>
+      <div>
+      <label for="category">Category:</label>
+      <input type="text" name = "category" id="category">
+      </div>
+      <div>
+      <label for="author">Author:</label>
+      <input type="text" name = "author" id="author">
+      </div>
+      <input type="submit" name="submit" value="Submit">
+    </form>
+  </body>
+</html>

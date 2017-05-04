@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>User Reviews</title>
+    <style media="screen">
+    .rev{
+      margin-left: 50%;
+      margin-right: 20px;
+    }
+    </style>
+  </head>
+  <body>
+    <a href="/books" class = "rev">Home</a>
+    <a href="/books/add">Add Book and Review</a>
+    <a href="/logout">Logout</a>
+    <p>Name: {{user.first_name}}  {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Total Reviews: {{user.userreview.count}}</p>
+
+    <h3>Posted Reviews on the following books:</h3>
+    {% for review in user.userreview.all%}
+    <a href="/books/{{review.books.id}}">{{review.books.title}}</a> <br>
+    {% endfor %}
+  </body>
+</html>

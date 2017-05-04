@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Book and Review</title>
+    <style media="screen">
+    .left, .right{
+      display: inline-block;
+      vertical-align: top;
+    }
+    .left{
+      width: 69%
+    }
+    .header h2, .header a{
+      display: inline-block;
+      vertical-align: top;
+    }
+    .rev{
+      margin-left: 50%;
+      margin-right: 20px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>{{book.title}}</h1>
+      <p>Author: {{book.author}}</p>
+      <a href="/books" class = "rev">Home</a>
+      <a href="/logout">Logout</a>
+    </div>
+    <hr>
+    <div class="left">
+      <h2>Reviews:</h2>
+      {%  for review in reviews %}
+        <p>Rating: {{review.rating}}</p>
+        <p><a href="/users/{{review.users.id}}">{{review.users.first_name}}</a> says: {{review.review}}</p>
+        <p>Posted on {{review.created_at}}</p>
+      {% endfor %}
+    </div>
+
+    <div class="right">
+      <h3>Add a Review</h3>
+      <form class="" action="/postreview/{{book.id}}" method="post">
+        {% csrf_token %}
+        <label for="review">Review:</label> <br>
+        <textarea name="review" rows="6" cols="60" required></textarea> <br>
+          <label for="rating">Rating</label>
+          <select id = "rating" name = "rating" required>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          stars.
+        </p>
+        <input type="submit" class="btn btn-primary" name="submit" value="Submit Review">
+      </form>
+    </div>
+  </body>
+</html>

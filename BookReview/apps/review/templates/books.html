@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Books Home</title>
+    <style media="screen">
+      .header h2, .header a{
+        display: inline-block;
+      }
+      .rev{
+        margin-left: 50%;
+        margin-right: 20px;
+      }
+      .left, .right{
+        display: inline-block;
+        vertical-align: top;
+      }
+      .left{
+        width: 69%
+      }
+      .books{
+        height: 300px;
+        width: 300px;
+        border: 1px solid black;
+        overflow: scroll;
+      }
+
+      .books p{
+        padding: 5px;
+      }
+      .stars{
+        font-size: 50px;
+      }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="header">
+      <h2>Welcome, {{user.first_name}}!</h2>
+      <a href="/books/add" class = "rev">Add Book and Review</a>
+      <a href="/logout">Logout</a>
+      <hr>
+    </div>
+    <div class="left">
+      <h3>Recent Book Reviews:</h3>
+      {% for review in reviews %}
+      <a href="/books/{{review.books.id}}">{{review.books.title}}</a>
+      {% if review.rating == 4 %}
+      <p>Rating: <span class = "stars">****</span></p>
+      {% elif review.rating == 3 %}
+      <p>Rating: ***</p>
+      {% elif review.rating == 2 %}
+      <p>Rating: **</p>
+      {% elif review.rating == 1 %}
+      <p>Rating: *</p>
+      {% elif review.rating == 5 %}
+      <p>Rating: ****</p>
+      {% endif %}
+      <p><a href="/users/{{review.users.id}}">{{review.users.first_name}}</a> says: {{review.review}}</p>
+      <p>Posted on {{review.created_at}}</p>
+      {% endfor %}
+    </div>
+    <div class="right">
+      <h3>Other Books with Reviews</h3>
+        <div class="books">
+          {%  for book in books %}
+          <p><a href="/books/{{book.id}}">{{book.title}}</a></p>
+          {% endfor %}
+        </div>
+    </div>
+
+
+  </body>
+</html>

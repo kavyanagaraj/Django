@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Book and Review</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style media="screen">
+    .header h2, .header a{
+      display: inline-block;
+      vertical-align: top;
+    }
+    .rev{
+      margin-left: 50%;
+      margin-right: 20px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Add a New Book Title and a Review</h1>
+      <a href="/books" class = "rev">Home</a>
+      <a href="/logout">Logout</a>
+    </div>
+    <form class="" action="/postbooks" method="post">
+      {% csrf_token %}
+      {% if messages %}
+        {% for message in messages %}
+          <p{% if message.tags %} class="{{ message.tags }}"{% endif %} id = "red">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+      <label for="title">Book Title:</label>
+      <input type="text" name="title" value="" id = "title" required> <br>
+      <label for="author">Author:</label> <br>
+      <label for="autlist">Choose from the list:</label>
+      <select name="alist" id = "autlist">
+        {% for book in books %}
+          <option value = {{author}}>{{book.author}}</option>
+        {%  endfor %}
+      </select> <br>
+      <label for="newauthor">Or add a new Author</label>
+      <input type="text" id = "newauthor" name="newauthor" value="">
+      <p>
+      <label for="review">Review:</label> <br>
+      <textarea name="review" rows="6" cols="60" required></textarea> <br>
+        <label for="rating">Rating</label>
+        <select id = "rating" name = "rating" required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        stars.
+      </p>
+      <input type="submit" class="btn btn-primary" name="submit" value="Add Book and Review">
+    </form>
+  </body>
+</html>
